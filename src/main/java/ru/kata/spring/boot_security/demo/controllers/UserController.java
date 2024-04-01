@@ -18,7 +18,7 @@ public class UserController {
 
     @GetMapping()
     public String adminInfo(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("user", user);
+        model.addAttribute("currentUser", user);
         return "user";
     }
 }
