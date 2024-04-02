@@ -43,12 +43,10 @@ public class AdminController {
 
 
     @PostMapping("/create")
-    public String saveNewUser(@ModelAttribute("user") @Valid User user,
-                              BindingResult bindingResult,
-                              @RequestParam(value = "rolesForController", required = false) List<String> roleName,
-                              Model model) {
-
-            return "redirect:/admin";
+    public String saveNewUser(@ModelAttribute("user") User user,
+                              @RequestParam(value = "rolesForController", required = false) List<String>  rolesFromView) {
+        userService.saveUser(user,  rolesFromView);
+        return "redirect:/admin";
     }
 
 

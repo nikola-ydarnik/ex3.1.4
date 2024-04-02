@@ -111,7 +111,7 @@
 
 
                                                             <!--edit-->
-                                                            <form th:method="PATCH" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}" th:value="${user}">
+                                                            <form th:action="@{/admin/update/{id}(id=${user.id})}" th:method="PATCH" th:object="${user}" th:value="${user}">
                                                                 <div class="modal fade" th:attr="id=${'editModal' + user.id}" tabindex="-1"
                                                                      aria-labelledby="edit" aria-hidden="true">
                                                                     <div class="modal-dialog">
@@ -126,10 +126,10 @@
                                                                                     <div class="modal-body col-7 mx-auto text-center">
 
                                                                                         <label for="idEdit" class="form-label fw-bold mb-0">ID</label>
-                                                                                        <input type="text" th:value="${user.getId()}" class="form-control" id="idEdit" readonly>
+                                                                                        <input type="text" th:value="${user.id}" class="form-control" id="idEdit" readonly>
                                                                                         <br>
                                                                                         <label for="firstNameEdit" class="form-label fw-bold mb-0">First name</label>
-                                                                                        <input type="text" th:value="${user.name}"  class="form-control" id="firstNameEdit">
+                                                                                        <input type="text" th:value="${user.getName()}"  class="form-control" id="firstNameEdit">
                                                                                         <br>
                                                                                         <label for="lastNameEdit" class="form-label fw-bold mb-0">Last name</label>
                                                                                         <input type="text" th:value="${user.getSurname()}" class="form-control" id="lastNameEdit">
