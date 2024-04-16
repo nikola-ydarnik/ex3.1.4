@@ -8,4 +8,6 @@ import java.util.Set;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     Set<Role> findByRoleNameIn(List<String> roleName);
+
+    Role findRoleByRoleName(String roleName);
 }

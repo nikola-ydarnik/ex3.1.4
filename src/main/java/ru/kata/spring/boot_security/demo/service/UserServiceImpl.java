@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Optional;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -86,7 +87,11 @@ public class UserServiceImpl implements UserService {
         if (rolesFromView == null) {
             user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
         } else {
-            user.setRoles(roleSerivce.findByRoleNameIn(rolesFromView));
+            user.setRoles(rolesFromView.stream().map(role -> roleSerivce.findRoleByRoleName(role)).collect(Collectors.toSet()));
+            System.out.println("........................................................");
+            System.out.println("........................................................");
+            System.out.println("........................................................");
+            System.out.println(user.getRoles());
         }
         userRepository.save(user);
     }

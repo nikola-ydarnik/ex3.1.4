@@ -1,20 +1,14 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleSerivce;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -38,7 +32,7 @@ public class AdminController {
         model.addAttribute("users", userService. getListAllUsers());
         model.addAttribute("currentUser", user);
         model.addAttribute("userEmpty", new User());
-        return "all_users";
+        return "admin";
     }
 
 
@@ -58,7 +52,7 @@ public class AdminController {
         System.out.println("........................................................");
         System.out.println("........................................................");
         System.out.println(user);
-
+        System.out.println(rolesFromView);
         userService.updateUser(user, rolesFromView);
         return "redirect:/admin";
     }
