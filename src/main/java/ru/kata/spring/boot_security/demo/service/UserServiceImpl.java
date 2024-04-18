@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         user.setRoles(roles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return true;
+         return true;
     }
 
     @Transactional
