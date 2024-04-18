@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     public boolean saveUser(User user, List<String> rolesFromView) {
-        if (userRepository.findUserByName(user.getName()).isPresent()) {
-            return false;
-        }
+//        if (userRepository.findUserByName(user.getName()).isPresent()) {
+//            return false;
+//        }
         Set<Role> roles = roleSerivce.findByRoleNameIn(rolesFromView);
         user.setRoles(roles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -83,16 +83,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateUser(User user, List<String> rolesFromView) {
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        if (rolesFromView == null) {
-            user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
-        } else {
-            user.setRoles(rolesFromView.stream().map(role -> roleSerivce.findRoleByRoleName(role)).collect(Collectors.toSet()));
-            System.out.println("........................................................");
-            System.out.println("........................................................");
-            System.out.println("........................................................");
-            System.out.println(user.getRoles());
+        User userFromDB = userRepository.findUserById(user.getId());
+        if (!user.getPassword().equals(userFromDB.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
+
+        user.setRoles(rolesFromView.stream()
+                .map(role -> roleSerivce.findRoleByRoleName(role))
+                .collect(Collectors.toSet()));
         userRepository.save(user);
     }
     @Transactional

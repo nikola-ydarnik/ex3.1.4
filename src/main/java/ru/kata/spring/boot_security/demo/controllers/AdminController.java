@@ -32,7 +32,7 @@ public class AdminController {
         model.addAttribute("users", userService. getListAllUsers());
         model.addAttribute("currentUser", user);
         model.addAttribute("userEmpty", new User());
-        return "admin";
+        return "all_users";
     }
 
 
@@ -48,11 +48,6 @@ public class AdminController {
     public String saveUpdateUser(@ModelAttribute("user") User user,
                                  @RequestParam(value = "rolesForController", required = false) List<String> rolesFromView) {
 
-        System.out.println("........................................................");
-        System.out.println("........................................................");
-        System.out.println("........................................................");
-        System.out.println(user);
-        System.out.println(rolesFromView);
         userService.updateUser(user, rolesFromView);
         return "redirect:/admin";
     }
